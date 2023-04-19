@@ -1,0 +1,20 @@
+:root {
+    --primary-normal:#a1b281 ;
+    --primary-fire: #ff8838;
+    --primary-water: #0984e3;
+    --primary-grass: #05c46b;
+    --primary-flying:#c178f5 ;
+    --primary-fighting: #b33939;
+    --primary-poison: #a45ce7;
+    --primary-eletric:#ffd32a;
+    --primary-ground: #e3b153 ;
+    --primary-rock: #675327;
+    --primary-psychic: #e63c8b;
+    --primary-ice: #17c0eb;
+    --primary-bug:#a5ce00 ;
+    --primary-ghost: #574b90;
+    --primary-steel: #808e9b;
+    --primary-dragon: #8165ff;
+    --primary-dark:#483c18 ;
+    --primary-fairy: #f7a4cf;
+}

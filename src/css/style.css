@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 10rem;
+}
+
+.content {
+    padding: 1rem;
+    max-width: 1440rem;
+    margin: 0 auto;
+}
+
+.pokemons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    animation: 0.3s ease-in-out;
+    
+}
+
+ol.pokemons li.pokemon:hover {
+ /* transform: scale(1.1); */
+ filter: brightness(1.1);
+}
+
+li.pokemon {
+    display: flex;
+    flex-direction: column;
+    margin: 8rem;
+    padding: 16rem;
+    border-radius: 16rem;
+}
+
+li.pokemon .number {
+    align-self: flex-end;
+    font-weight: 500;
+    /* font-size: 12rem; */
+}
+li.pokemon .name {
+    font-weight: 700;
+    font-size: 24rem;
+    text-transform: capitalize;
+}
+
+li.type {
+    border-radius: 15rem;
+    padding: 3rem;
+    width: 70rem;
+    margin: 5rem 0;
+    text-align: center;    
+    text-transform: capitalize;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ol.pokemons li img {
+    max-width: 100rem;
+    height: 100rem;
+    align-self: flex-end;
+}
+
+
+
+li.type {
+    filter: brightness(1.25);
+}
+/* ----    Tipos e Cores de Fundo     ----*/
+.normal {
+    background-color: var(--primary-normal);
+}
+
+.fire {
+    background-color: var(--primary-fire);
+}
+
+.water {
+    background-color: var(--primary-water);
+}
+
+.grass {
+    background-color: var(--primary-grass);
+}
+
+.flying {
+    background-color: var(--primary-flying);
+}
+
+.fighting {
+    background-color: var(--primary-fighting);
+}
+
+.poison {
+    background-color: var(--primary-poison);
+}
+
+.eletric {
+    background-color: var(--primary-eletric);
+}
+
+.ground {
+    background-color: var(--primary-ground);
+}
+
+.rock {
+    background-color: var(--primary-rock);
+}
+
+.psychic {
+    background-color: var(--primary-psychic);
+}
+
+.ice {
+    background-color: var(--primary-ice);
+}
+
+.bug {
+    background-color: var(--primary-bug);
+}
+
+.ghost {
+    background-color: var(--primary-ghost);
+}
+
+.steel {
+    background-color: var(--primary-steel);
+}
+
+.dragon {
+    background-color: var(--primary-dragon);
+}
+
+.dark {
+    background-color: var(--primary-dark);
+}
+
+.fairy {
+    background-color: var(--primary-fairy);
+}
+
