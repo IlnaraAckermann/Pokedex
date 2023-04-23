@@ -2,53 +2,52 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    margin: 10rem;
+    
+    background-color: rgb(246, 246, 246);
 }
 
 .content {
-    padding: 1rem;
+    padding: 16rem;
     max-width: 1440rem;
     margin: 0 auto;
+    background-color: #fff;
 }
 
 .pokemons {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    animation: 0.3s ease-in-out;
-    
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
-
-ol.pokemons li.pokemon:hover {
- /* transform: scale(1.1); */
- filter: brightness(1.1);
-}
-
-li.pokemon {
+li.pokemon { 
     display: flex;
     flex-direction: column;
     margin: 8rem;
     padding: 16rem;
     border-radius: 16rem;
+    transition: 0.3s ease-in-out;
 }
-
-li.pokemon .number {
+li.pokemon:hover {
+ transform: scale(1.05);
+ filter: brightness(1.1);
+}
+.number {
     align-self: flex-end;
     font-weight: 500;
-    /* font-size: 12rem; */
 }
-li.pokemon .name {
+
+.name {
     font-weight: 700;
     font-size: 24rem;
     text-transform: capitalize;
 }
 
-li.type {
+.type {
     border-radius: 15rem;
     padding: 3rem;
     width: 70rem;
     margin: 5rem 0;
     text-align: center;    
-    text-transform: capitalize;
+    text-transform: capitalize;    
+    filter: brightness(1.25);
 }
 
 .details {
@@ -57,17 +56,34 @@ li.type {
     align-items: center;
 }
 
-ol.pokemons li img {
+img {
     max-width: 100rem;
     height: 100rem;
     align-self: flex-end;
 }
 
-
-
-li.type {
-    filter: brightness(1.25);
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
 }
+
+.pagination button{
+    background-color: rgb(95, 0, 139);
+    color: #fff;
+    padding: 5rem 20rem;
+    border-radius: 16rem;
+    transition: 0.3s ease-in-out;
+}
+
+.pagination button:hover{
+    filter: brightness(1.3);
+}
+
+
 /* ----    Tipos e Cores de Fundo     ----*/
 .normal {
     background-color: var(--primary-normal);
@@ -97,7 +113,7 @@ li.type {
     background-color: var(--primary-poison);
 }
 
-.eletric {
+.electric {
     background-color: var(--primary-eletric);
 }
 

@@ -2,7 +2,7 @@ const pokeApi = {}
 
 function convertePokeApiDetailToPokemon(pokeDetail) {
   const pokemon = new Pokemon()
-  pokemon.numberID = pokeDetail.order
+  pokemon.numberID = pokeDetail.id
   pokemon.name = pokeDetail.name
 
   const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
@@ -12,10 +12,6 @@ function convertePokeApiDetailToPokemon(pokeDetail) {
   pokemon.mainType = mainType
 
   pokemon.imagem = pokeDetail.sprites.other.dream_world.front_default
-
-
-  pokemon.stats = pokeDetail.stats.map((statSlot)=> statSlot.stat.name)
-  pokemon.ability = pokeDetail.abilities.map((abilitySlot)=> abilitySlot.ability.name)
   return pokemon
 }
 
@@ -35,5 +31,5 @@ pokeApi.getPokemons = (offset = 0, limit = 20) => {
     .then((detailRequest) => Promise.all(detailRequest))
     .then((pokemonsDetails) => pokemonsDetails)
     .catch((error) => console.log(error)); // arrow function tratamento de erro
-};
+}
 
