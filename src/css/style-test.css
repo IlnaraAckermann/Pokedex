@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    
+
     background-color: rgb(246, 246, 246);
 }
 
@@ -22,19 +22,49 @@ body {
     display: flex;
     flex-direction: row;
     align-content: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     padding: 1rem;
 }
 
-.pagination button{
+button {
     background-color: rgb(95, 0, 139);
+    font-size: 18rem;
+    padding: 16rem 40rem;
     color: #fff;
-    padding: 5rem 20rem;
     border-radius: 16rem;
     transition: 0.3s ease-in-out;
 }
 
-.pagination button:hover{
+button:hover {
     filter: brightness(1.3);
+}
+
+#searchInput {
+    height: 50rem;
+    width: 100%;
+    border-radius: 20rem;
+    font-size: 30rem;
+    font-weight: 400;
+    text-indent: 15rem;
+    margin-right: 5rem;
+}
+
+.search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8rem;
+}
+
+
+@media screen and (max-width: 480px) {
+    button {
+        font-size: 18rem;
+        padding: 16rem 20rem;
+    }
+
+    #searchInput {
+        font-size: 18rem;   
+    }
 }

@@ -17,15 +17,21 @@
 <body>
     <section class="content">
         <h1>Pokedex</h1>
+
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Procure o Pokémon pelo nome ou pelo id...">
+            <button id="searchButton">Search</button>
+        </div>
+
         <ol class="pokemons" id="pokemonsList">
             <!-- Aqui vem o js -->
         </ol>
 
         <class class="pagination">
-            <button id="loadMoreButton" type="button">
-                Load More
-            </button>
+            <button id="previousButton"> Previous </button>
+            <button id="nextButton"> Next </button>
         </class>
+
     </section>
 
     <script type="text/javascript" src="src/js/pokemon-model.js"></script>
