@@ -7,13 +7,33 @@ function convertePokeApiDetailToPokemon(pokeDetail) {
   pokemon.name = pokeDetail.name;
 
   const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name);
+
   const [mainType] = types;
 
   pokemon.types = types;
   pokemon.mainType = mainType;
 
   pokemon.imagem = pokeDetail.sprites.other.dream_world.front_default;
-  // pokemon.imagem = pokeDetail.sprites.versions["generation-v"]["black-white"].animated.front_default;
+
+  pokemon.weight = pokeDetail.weight;
+  pokemon.height = pokeDetail.height;
+
+  const stats = pokeDetail.stats.map((stat) => {
+    return {
+      baseStat: stat.base_stat,
+      name: stat.stat.name,
+    };
+  });
+
+  pokemon.stats=stats;
+
+
+  const abilities = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name);
+  pokemon.abilities = abilities; 
+  
+  const moves = pokeDetail.moves.map((moveSlot) => moveSlot.move.name);
+  pokemon.moves = moves; 
+
   return pokemon;
 }
 
@@ -24,7 +44,7 @@ pokeApi.getPokemonsDetail = (pokemon) => {
 };
 
 pokeApi.getPokemons = (offset = 0, limit = 20) => {
-  const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}"`;
+  const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
   return fetch(url)
     .then((response) => response.json()) // arrow function que retorna um response.json
     .then((jsonBody) => jsonBody.results)
@@ -44,28 +64,39 @@ pokeApi.getCount = () => {
     .catch((error) => console.log(error));
 };
 
-
 pokeApi.fetchPokemonData = (url) => {
   return fetch(url)
     .then((response) => response.json())
     .then((data) => data)
-    .catch((error) => console.log(error)); 
-}
+    .catch((error) => console.log(error));
+};
+
+// pokeApi.searchPokemon = (name) => {
+//   const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
+//   return pokeApi
+//     .fetchPokemonData(url)
+//     .then((data) => {
+//       const pokemon = new Pokemon();
+//       pokemon.numberID = data.id;
+//       pokemon.name = data.name;
+//       pokemon.types = data.types.map((typeSlot) => typeSlot.type.name);
+//       pokemon.mainType = pokemon.types[0];
+//       pokemon.imagem = data.sprites.other.dream_world.front_default;
+//       return pokemon;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       return null;
+//     });
+// };
 
 pokeApi.searchPokemon = (name) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
-  return pokeApi.fetchPokemonData(url)
-    .then((data) => {
-      const pokemon = new Pokemon()
-      pokemon.numberID = data.id
-      pokemon.name = data.name
-      pokemon.types = data.types.map((typeSlot) => typeSlot.type.name)
-      pokemon.mainType = pokemon.types[0]
-      pokemon.imagem = data.sprites.other.dream_world.front_default
-      return pokemon
-    })
+  return pokeApi
+    .fetchPokemonData(url)
+    .then(convertePokeApiDetailToPokemon)
     .catch((error) => {
-      console.log(error)
-      return null
+      console.log(error);
+      return null;
     });
-}
+};

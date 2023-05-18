@@ -1,4 +1,5 @@
 const pokemonsList = document.getElementById("pokemonsList");
+const pokemonsDetail = document.getElementById("pokemon")
 const loadMoreButton = document.getElementById("loadMoreButton");
 const previousButton = document.getElementById("previousButton");
 const nextButton = document.getElementById("nextButton");
@@ -30,7 +31,7 @@ pokeApi
           `
           )
           .join("");
-        pokemonsList.innerHTML = newHtml;
+          pokemonsList.innerHTML = newHtml;
       });
     }
 
@@ -54,51 +55,43 @@ pokeApi
       }
     });
    
-    // searchButton.addEventListener("click", () => {
-    //   const searchValue = searchInput.value.toLowerCase();
-    //   const searchUrl = `https://pokeapi.co/api/v2/pokemon/${searchValue}`;
-    //   fetch(searchUrl)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       const pokemon = convertePokeApiDetailToPokemon(data);
-    //       const newHtml = `
-    //         <pokemon-card
-    //         mainType="${pokemon.mainType}"
-    //         pokemon-number="${pokemon.numberID}"
-    //         pokemon-name="${pokemon.name}"
-    //         pokemon-src='${pokemon.imagem}'
-    //         pokemon-types='${pokemon.types
-    //           .map((type) => `<li class="type ${type}">${type}</li>`)
-    //           .join("")}'
-    //           ></pokemon-card>
-    //         `;
-    //       pokemonsList.innerHTML = newHtml;
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       pokemonsList.innerHTML = `<p>No Pokémon found for "${searchValue}"</p>`;
-    //     });
-    // });
-      
-
-
-    
 
   searchButton.addEventListener("click", () => {
       const searchValue = searchInput.value.toLowerCase();
       pokeApi.searchPokemon(searchValue).then((pokemon) => {
-    const newHtml = `
-            <pokemon-card
-            mainType="${pokemon.mainType}"
-            pokemon-number="${pokemon.numberID}"
-            pokemon-name="${pokemon.name}"
-            pokemon-src='${pokemon.imagem}'
-            pokemon-types='${pokemon.types
-              .map((type) => `<li class="type ${type}">${type}</li>`)
-              .join("")}'
-              ></pokemon-card>
-            `;
-  pokemonsList.innerHTML = newHtml;
+        console.log(searchValue)
+        console.log(pokemon)
+    const newHtml=`
+    <pokemon-detail
+      mainType="${pokemon.mainType}"
+      pokemon-number="${pokemon.numberID}"
+      pokemon-name="${pokemon.name}"
+      pokemon-src='${pokemon.imagem}'
+      pokemon-types='${pokemon.types
+                   .map((type) => `<span class="${type}">${type}</span>`)
+                   .join("")}'
+      pokemon-height='${pokemon.height}'
+      pokemon-weight='${pokemon.weight}'
+      pokemon-stats='${pokemon.stats
+        .map((stat) => `
+                <div class="stats-bar">
+                    <span>${stat.name}</span>
+                    <div class="bar">
+                        <div class="fill ${pokemon.mainType}" style="width: ${stat.baseStat}%;">
+                        </div>
+                    </div>
+                </div>`)
+        .join("")}'
+        pokemon-abilities='${pokemon.abilities
+          .map((ability) => `<span>${ability}</span>`)
+          .join("")}'
+        pokemon-moves='${pokemon.moves
+          .map((move) => `<span>${move}</span>`)
+          .join("")}'
+    >    
+    </pokemon-detail>
+    `
+  pokemonsDetail.innerHTML = newHtml;
   })
   .catch((error) => {
     console.log(error)

@@ -1,0 +1,129 @@
+
+.fire {
+    background-color: #fa9243;
+}
+.sideUp.fire {
+    background: linear-gradient(to right bottom, #fa9243, #ffa159);
+}
+
+.water {
+    background-color: #549EDE;
+}
+.sideUp.water {
+    background: linear-gradient(to right bottom, #549EDE, #58b1ff);
+}
+
+.grass {
+    background-color: #5EBD52;
+}
+.sideUp.grass {
+    background: linear-gradient(to right bottom, #5EBD52, #77ee68);
+}
+
+.flying {
+    background-color: #8FA6D9;
+}
+.sideUp.flying {
+    background: linear-gradient(to right bottom, #8FA6D9, #b0c9ff);
+}
+
+.fighting {
+    background-color: #CF4266;
+}
+.sideUp.fighting {
+    background: linear-gradient(to right bottom, #CF4266, #f6577f);
+}
+
+.poison {
+    background-color: #A863C7;
+}
+.sideUp.poison {
+    background: linear-gradient(to right bottom, #A863C7, #cf7bf6);
+}
+
+
+.electric {
+    background-color: #EDD63D;
+}
+.sideUp.electric {
+    background: linear-gradient(to right bottom, #EDD63D, #ffeb68);
+}
+
+.ground {
+    background-color: #c9724a;
+}
+.sideUp.ground {
+    background: linear-gradient(to right bottom, #c9724a, #f68c5b);
+}
+
+.rock {
+    background-color: #C4B58A;
+}
+.sideUp.rock {
+    background: linear-gradient(to right bottom, #C4B58A, #f1dea9);
+}
+
+.psychic {
+    background-color: #e63c8b;
+}
+.sideUp.psychic {
+    background: linear-gradient(to right bottom, #e63c8b, #ff67ae);
+}
+
+.ice {
+    background-color: #70CCBD;
+}
+.sideUp.ice {
+    background: linear-gradient(to right bottom, #70CCBD, #8effec);
+}
+
+.bug {
+    background-color: #B0C736;
+}
+.sideUp.bug {
+    background: linear-gradient(to right bottom, #B0C736, #d7f347);
+}
+
+.ghost {
+    background-color: #526BAB;
+}
+.sideUp.ghost {
+    background: linear-gradient(to right bottom, #526BAB, #6887d6);
+}
+
+.steel {
+    background-color: #52879E;
+}
+.sideUp.steel {
+    background: linear-gradient(to right bottom, #52879E, #6bb2d1);
+}
+
+.dragon {
+    background-color: #8165ff;
+}
+.sideUp.dragon {
+    background: linear-gradient(to right bottom, #8165ff, #8e74ff);
+}
+
+.dark {
+    background-color: #595761;
+}
+.sideUp.dark {
+    background: linear-gradient(to right bottom, #595761, #6d6a78);
+}
+
+
+.fairy {
+    background-color: #ED8CE6;
+}
+.sideUp.fairy {
+    background: linear-gradient(to right bottom, #ED8CE6, #ffa5f9);
+}
+
+
+.normal {
+    background: #9b9b8d;
+}
+.sideUp.normal{
+    background: linear-gradient(to right bottom, #9b9b8d, #bcbcaf);
+}

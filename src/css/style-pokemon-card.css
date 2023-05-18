@@ -1,42 +1,47 @@
+/* .normal {
+    background: #9b9b8d;
+} */
 
-.normal {
-    background-color: #a1b281;
-}
-
+/* .pokemon.normal {
+    background: linear-gradient(to right bottom,
+            rgba(145, 153, 163, 1),
+            rgb(165, 163, 153));
+} */
+/* 
 .fire {
-    background-color: #ff8838;
+    background-color: #FA9C52;
 }
 
 .water {
-    background-color: #0984e3;
+    background-color: #549EDE;
 }
 
 .grass {
-    background-color: #05c46b;
+    background-color: #5EBD52;
 }
 
 .flying {
-    background-color: #c178f5;
+    background-color: #8FA6D9;
 }
 
 .fighting {
-    background-color: #b33939;
+    background-color: #CF4266;
 }
 
 .poison {
-    background-color: #a45ce7;
+    background-color: #A863C7;
 }
 
 .electric {
-    background-color: #ffd32a;
+    background-color: #EDD63D;
 }
 
 .ground {
-    background-color: #e3b153;
+    background-color: #c9724a;
 }
 
 .rock {
-    background-color: #675327;
+    background-color: #C4B58A;
 }
 
 .psychic {
@@ -44,19 +49,19 @@
 }
 
 .ice {
-    background-color: #17c0eb;
+    background-color: #70CCBD;
 }
 
 .bug {
-    background-color: #a5ce00;
+    background-color: #B0C736;
 }
 
 .ghost {
-    background-color: #574b90;
+    background-color: #526BAB;
 }
 
 .steel {
-    background-color: #808e9b;
+    background-color: #52879E;
 }
 
 .dragon {
@@ -64,23 +69,32 @@
 }
 
 .dark {
-    background-color: #483c18;
+    background-color: #595761;
 }
 
 .fairy {
-    background-color: #f7a4cf;
-}
+    background-color: #ED8CE6;
+} */
+
 
 li.pokemon {
+    background-image: url(../img/pokeball-card.svg);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 150px;
+}
+
+.pokemon {
     display: flex;
     flex-direction: column;
     margin: 8rem;
     padding: 16rem;
     border-radius: 16rem;
-    transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out; 
 }
 
-li.pokemon:hover {
+
+.pokemon:hover {
     transform: scale(1.05);
     filter: brightness(1.1);
 }
@@ -100,7 +114,7 @@ li.pokemon:hover {
     border-radius: 15rem;
     padding: 3rem;
     width: 70rem;
-    margin: 5rem 0;
+    margin: 15rem 0;
     text-align: center;
     text-transform: capitalize;
     filter: brightness(1.25);
@@ -110,10 +124,13 @@ li.pokemon:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* padding: 16rem; */
+
 }
 
 img {
     max-width: 100rem;
     height: 100rem;
     align-self: flex-end;
+    background-size: contain;
 }
