@@ -100,3 +100,5 @@ pokeApi.searchPokemon = (name) => {
       return null;
     });
 };
+
+

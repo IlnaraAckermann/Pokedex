@@ -31,7 +31,7 @@ pokeApi
           `
           )
           .join("");
-          pokemonsList.innerHTML = newHtml;
+        pokemonsList.innerHTML = newHtml;
       });
     }
 
