@@ -15,7 +15,8 @@ pokeApi
 
     function loadMorePokemons(offset, limit) {
       pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-        const newHtml = pokemons
+        const newHtml = `<div class="pokemons" id="pokemonsList">` + 
+        pokemons
           .map(
             (pokemon) =>
               `
@@ -29,9 +30,10 @@ pokeApi
             .join("")}'
             ></pokemon-card>
           `
-          )
-          .join("");
-        pokemonsList.innerHTML = newHtml;
+          ) 
+          .join(""); + `</div>`
+        // pokemonsList.innerHTML = newHtml;
+        pokemonsDetail.innerHTML = newHtml;
       });
     }
 
