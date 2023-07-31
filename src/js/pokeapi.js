@@ -1,6 +1,4 @@
 const pokeApi = {};
-function getCount() {}
-
 function convertePokeApiDetailToPokemon(pokeDetail) {
   const pokemon = new Pokemon();
   pokemon.numberID = pokeDetail.id;
@@ -71,24 +69,7 @@ pokeApi.fetchPokemonData = (url) => {
     .catch((error) => console.log(error));
 };
 
-// pokeApi.searchPokemon = (name) => {
-//   const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
-//   return pokeApi
-//     .fetchPokemonData(url)
-//     .then((data) => {
-//       const pokemon = new Pokemon();
-//       pokemon.numberID = data.id;
-//       pokemon.name = data.name;
-//       pokemon.types = data.types.map((typeSlot) => typeSlot.type.name);
-//       pokemon.mainType = pokemon.types[0];
-//       pokemon.imagem = data.sprites.other.dream_world.front_default;
-//       return pokemon;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       return null;
-//     });
-// };
+
 
 pokeApi.searchPokemon = (name) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
@@ -103,74 +84,4 @@ pokeApi.searchPokemon = (name) => {
 
 
 
-const pokemonCards = pokemonsList.getElementsByTagName('pokemon-card');
-console.log(pokemonCards)
-console.log("pokemonCards.length : " + pokemonCards.length)
-const nodeArray = pokemonsList.querySelectorAll('pokemon-card')
-console.log("nodeArray " + nodeArray)
 
-
-for (let card of pokemonCards ) {
-  console.log("card: " + card)
-}
-
-// elementsArray.forEach((card) => {  
-// console.log(card)
-//   card.addEventListener('click', () => {
-//     const searchValue = card.getAttribute('pokemon-name').toLowerCase();
-//     pokeApi.searchPokemon(searchValue)
-//       .then((pokemon) => {
-//         console.log(searchValue);
-//         console.log(pokemon);
-//         const newHtml = `
-//           <pokemon-detail
-//             mainType="${pokemon.mainType}"
-//             pokemon-number="${pokemon.numberID}"
-//             pokemon-name="${pokemon.name}"
-//             pokemon-src="${pokemon.imagem}"
-//             pokemon-types="${pokemon.types
-//               .map((type) => `<span class="${type}">${type}</span>`)
-//               .join('')}"
-//             pokemon-height="${pokemon.height}"
-//             pokemon-weight="${pokemon.weight}"
-//             pokemon-stats="${pokemon.stats
-//               .map(
-//                 (stat) => `
-//                   <div class="stats-bar">
-//                     <span>${stat.name}</span>
-//                     <div class="bar">
-//                       <div class="fill ${pokemon.mainType}" style="width: ${stat.baseStat}%;">
-//                       </div>
-//                     </div>
-//                   </div>`
-//               )
-//               .join('')}"
-//             pokemon-abilities="${pokemon.abilities
-//               .map((ability) => `<span>${ability}</span>`)
-//               .join('')}"
-//             pokemon-moves="${pokemon.moves
-//               .map((move) => `<span>${move}</span>`)
-//               .join('')}"
-//           >
-//           </pokemon-detail>
-//         `;
-//         pokemonsDetail.innerHTML = newHtml;
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   });
-// });
-
-
-function funcao(array) {
-  let acc = 0;
-
-  for (let elemento of array) {
-    acc += elemento;
-  }
-
-  return (acc / array.length);
-}
-
-console.log(funcao([4, 6, 4, 2]));

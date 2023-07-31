@@ -2,6 +2,7 @@ class PokemonDetailCard extends HTMLElement {
   constructor() {
     super();
 
+    
     const shadow = this.attachShadow({ mode: "open" });
     shadow.appendChild(this.reset());
     shadow.appendChild(this.typography());
