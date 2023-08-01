@@ -23,6 +23,7 @@ function convertePokeApiDetailToPokemon(pokeDetail) {
   pokemon.moves = moves; 
   return pokemon;
 }
+
 pokeApi.getPokemonsDetail = (pokemon) => {
   return fetch(pokemon.url)
     .then((response) => response.json())
@@ -37,15 +38,6 @@ pokeApi.getPokemons = (offset = 0, limit = 20) => {
     .then((detailRequest) => Promise.all(detailRequest))
     .then((pokemonsDetails) => pokemonsDetails)
     .catch((error) => console.log(error)); // arrow function tratamento de erro
-};
-pokeApi.getCount = () => {
-  const url = `https://pokeapi.co/api/v2/pokemon`;
-  return fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      pokeApi.count = data.count;
-    })
-    .catch((error) => console.log(error));
 };
 pokeApi.fetchPokemonData = (url) => {
   return fetch(url)

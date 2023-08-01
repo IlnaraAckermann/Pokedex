@@ -32,7 +32,7 @@ function loadMorePokemons(offset, limit) {
           <button onclick="next()"> Next </button>
           </div>`;
 		pokemonsDetail.innerHTML = newHtml;
-    test()
+
 	});
 }
 function next() {
@@ -99,6 +99,4 @@ pokemonsDetail.innerHTML = newHtml;
 
 
 loadMorePokemons(offset, limit);
-function test(){  
-    let pokemonCard = document.querySelectorAll("pokemon-card")
-}
+
