@@ -1,5 +1,4 @@
 const pokemonsDetail = document.getElementById("pokemon");
-const pokemonCard = document.querySelectorAll("pokemon-card")
 const limit = 20;
 let offset = 0;
 let count = 1281;
@@ -9,7 +8,7 @@ function loadMorePokemons(offset, limit) {
 		const newHtml =
 			`<div class="search">
       <input type="text" id="searchInput" placeholder="Procure o Pokémon">
-      <button id="searchButton" onclick="searchByName()">Search</button>
+      <button id="searchButton" onclick="searchBar()">Search</button>
       </div>
       <div class="pokemons" id="pokemonsList">` +
 			pokemons
@@ -33,6 +32,7 @@ function loadMorePokemons(offset, limit) {
           <button onclick="next()"> Next </button>
           </div>`;
 		pokemonsDetail.innerHTML = newHtml;
+    test()
 	});
 }
 function next() {
@@ -53,8 +53,13 @@ function previous() {
 		loadMorePokemons(offset, limit);
 	}
 }
+
+function searchBar (searchValue) {
+  searchValue = searchInput.value;
+  searchByName(searchValue)
+}
 function searchByName(searchValue) {
-    searchValue = searchInput.value.toLowerCase();
+    searchValue = searchValue.toLowerCase()
     pokeApi.searchPokemon(searchValue).then((pokemon) => {
   const newHtml=`
   <button id="close" onclick="loadMorePokemons()"> X </button>
@@ -91,4 +96,9 @@ pokemonsDetail.innerHTML = newHtml;
 })
 .catch((error) => console.log(error))}
 
+
+
 loadMorePokemons(offset, limit);
+function test(){  
+    let pokemonCard = document.querySelectorAll("pokemon-card")
+}
