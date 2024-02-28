@@ -5,8 +5,65 @@ const pokemonsDetail = document.getElementById("pokemon");
 
 
 
+
+async function loadMorePokemons(offset, limit) {
+	pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+		const newHtml =
+			`<div class="search">
+      <input type="text" id="searchInput" placeholder="Procure o Pokémon">
+      <button id="searchButton" onclick="searchBar()">Search</button>
+      </div>
+      <div class="pokemons" id="pokemonsList">` +
+			pokemons
+				.map(
+					(pokemon) =>
+						` 
+          <pokemon-card          
+          mainType="${pokemon.mainType}"
+          pokemon-number="${pokemon.numberID}"
+          pokemon-name="${pokemon.name}"
+          pokemon-src='${pokemon.imagem}'
+          pokemon-types='${pokemon.types
+						.map((type) => `<li class="type ${type}">${type}</li>`)
+						.join("")}'
+            )"></pokemon-card>
+          `
+				)
+				.join("") +
+			`</div>
+          <div class="pagination" id="btnPagination">
+          <button onclick="previous()"> Previous </button>
+          <button onclick="next()"> Next </button>
+          </div>`;
+		pokemonsDetail.innerHTML = newHtml;
+
+	});
+}
+function next() {
+	if (offset + limit < pokeApi.count - limit) {
+		offset += limit;
+		loadMorePokemons(offset, limit);
+	} else if (offset != pokeApi.count - limit) {
+		offset = pokeApi.count - limit;
+		loadMorePokemons(offset, limit);
+	}
+}
+function previous() {
+	if (offset >= limit) {
+		offset -= limit;
+		loadMorePokemons(offset, limit);
+	} else if (offset != 0) {
+		offset = 0;
+		loadMorePokemons(offset, limit);
+	}
+}
+
+function searchBar(searchValue) {
+	searchValue = searchInput.value;
+	searchByName(searchValue);
+}
 async function searchByName(searchValue) {
-	searchValue = searchInput.value.toLowerCase();
+	searchValue = searchValue.toLowerCase();
 	pokemon = await pokeApi.searchPokemon(searchValue);
 	const newHtml = `
   <button id="close" onclick="loadMorePokemons()"> X </button>
@@ -42,72 +99,6 @@ async function searchByName(searchValue) {
   </pokemon-detail>
   `;
 	pokemonsDetail.innerHTML = newHtml;
-}
-
-
-async function loadMorePokemons(offset, limit) {
-	pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-		const newHtml =
-			`<div class="search">
-      <input type="text" id="searchInput" placeholder="Procure o Pokémon">
-      <button id="searchButton" onclick="searchByName()">Search</button>
-      </div>
-      <div class="pokemons" id="pokemonsList">` +
-			pokemons
-				.map(
-					(pokemon) =>
-						` 
-          <pokemon-card          
-          mainType="${pokemon.mainType}"
-          pokemon-number="${pokemon.numberID}"
-          pokemon-name="${pokemon.name}"
-          pokemon-src='${pokemon.imagem}'
-          pokemon-types='${pokemon.types
-						.map((type) => `<li class="type ${type}">${type}</li>`)
-						.join("")}'
-            )"></pokemon-card>
-          `
-				)
-				.join("") +
-			`</div>
-          <div class="pagination" id="btnPagination">
-          <button onclick="previous()"> Previous </button>
-          <button onclick="next()"> Next </button>
-          </div>`;
-		pokemonsDetail.innerHTML = newHtml;
-
-        // const pokemonCards = document.querySelectorAll("pokemon-card");
-       
-        // console.log(pokemonCards);
-    
-        //     pokemonCards.forEach((card) => {
-        //         card.addEventListener("click", () => {
-        //             const pokemonName = card.getAttribute("pokemon-name");
-        //             console.log(pokemonName);
-        //             console.log(searchByName(pokemonName))
-        //             searchByName(pokemonName);
-        //             console.log('sda');
-        //         });
-        //     });
-	});
-}
-function next() {
-	if (offset + limit < pokeApi.count - limit) {
-		offset += limit;
-		loadMorePokemons(offset, limit);
-	} else if (offset != pokeApi.count - limit) {
-		offset = pokeApi.count - limit;
-		loadMorePokemons(offset, limit);
-	}
-}
-function previous() {
-	if (offset >= limit) {
-		offset -= limit;
-		loadMorePokemons(offset, limit);
-	} else if (offset != 0) {
-		offset = 0;
-		loadMorePokemons(offset, limit);
-	}
 }
 
 loadMorePokemons(offset, limit);
