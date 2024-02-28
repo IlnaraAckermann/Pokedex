@@ -1,9 +1,12 @@
-const pokemonsDetail = document.getElementById("pokemon");
 const limit = 20;
 let offset = 0;
-let count = 1281;
+const pokeApi = new PokeApi();
+const pokemonsDetail = document.getElementById("pokemon");
 
-function loadMorePokemons(offset, limit) {
+
+
+
+async function loadMorePokemons(offset, limit) {
 	pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
 		const newHtml =
 			`<div class="search">
@@ -12,7 +15,8 @@ function loadMorePokemons(offset, limit) {
       </div>
       <div class="pokemons" id="pokemonsList">` +
 			pokemons
-				.map((pokemon) =>
+				.map(
+					(pokemon) =>
 						` 
           <pokemon-card          
           mainType="${pokemon.mainType}"
@@ -25,8 +29,8 @@ function loadMorePokemons(offset, limit) {
             )"></pokemon-card>
           `
 				)
-				.join("")
-        +`</div>
+				.join("") +
+			`</div>
           <div class="pagination" id="btnPagination">
           <button onclick="previous()"> Previous </button>
           <button onclick="next()"> Next </button>
@@ -36,11 +40,11 @@ function loadMorePokemons(offset, limit) {
 	});
 }
 function next() {
-	if (offset + limit < count - limit) {
+	if (offset + limit < pokeApi.count - limit) {
 		offset += limit;
 		loadMorePokemons(offset, limit);
-	} else if (offset != count - limit) {
-		offset = count - limit;
+	} else if (offset != pokeApi.count - limit) {
+		offset = pokeApi.count - limit;
 		loadMorePokemons(offset, limit);
 	}
 }
@@ -54,49 +58,47 @@ function previous() {
 	}
 }
 
-function searchBar (searchValue) {
-  searchValue = searchInput.value;
-  searchByName(searchValue)
+function searchBar(searchValue) {
+	searchValue = searchInput.value;
+	searchByName(searchValue);
 }
-function searchByName(searchValue) {
-    searchValue = searchValue.toLowerCase()
-    pokeApi.searchPokemon(searchValue).then((pokemon) => {
-  const newHtml=`
+async function searchByName(searchValue) {
+	searchValue = searchValue.toLowerCase();
+	pokemon = await pokeApi.searchPokemon(searchValue);
+	const newHtml = `
   <button id="close" onclick="loadMorePokemons()"> X </button>
   <pokemon-detail
     mainType="${pokemon.mainType}"
     pokemon-number="${pokemon.numberID}"
     pokemon-name="${pokemon.name}"
-    pokemon-src='${pokemon.imagem}'
-    pokemon-types='${pokemon.types
-                 .map((type) => `<span class="${type}">${type}</span>`)
-                 .join("")}'
     pokemon-height='${pokemon.height}'
     pokemon-weight='${pokemon.weight}'
+    pokemon-src='${pokemon.imagem}'
+    pokemon-types='${pokemon.types
+			.map((type) => `<span class="${type}">${type}</span>`)
+			.join("")}'
     pokemon-stats='${pokemon.stats
-      .map((stat) => `
+			.map(
+				(stat) => `
               <div class="stats-bar">
                   <span>${stat.name}</span>
                   <div class="bar">
                       <div class="fill ${pokemon.mainType}" style="width: ${stat.baseStat}%;">
                       </div>
                   </div>
-              </div>`)
-      .join("")}'
+              </div>`
+			)
+			.join("")}'
       pokemon-abilities='${pokemon.abilities
-        .map((ability) => `<span>${ability}</span>`)
-        .join("")}'
+				.map((ability) => `<span>${ability}</span>`)
+				.join("")}'
       pokemon-moves='${pokemon.moves
-        .map((move) => `<span>${move}</span>`)
-        .join("")}'
+				.map((move) => `<span>${move}</span>`)
+				.join("")}'
   >
   </pokemon-detail>
-  `
-pokemonsDetail.innerHTML = newHtml;
-})
-.catch((error) => console.log(error))}
-
-
+  `;
+	pokemonsDetail.innerHTML = newHtml;
+}
 
 loadMorePokemons(offset, limit);
-
