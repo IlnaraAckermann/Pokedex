@@ -42,7 +42,6 @@ pokeApi.getPokemons = (offset = 0, limit = 20) => {
 pokeApi.fetchPokemonData = (url) => {
   return fetch(url)
     .then((response) => response.json())
-    .then((data) => data)
     .catch((error) => console.log(error));
 };
 pokeApi.searchPokemon = (name) => {

@@ -12,7 +12,8 @@ function loadMorePokemons(offset, limit) {
       </div>
       <div class="pokemons" id="pokemonsList">` +
 			pokemons
-				.map((pokemon) =>
+				.map(
+					(pokemon) =>
 						` 
           <pokemon-card          
           mainType="${pokemon.mainType}"
@@ -25,16 +26,19 @@ function loadMorePokemons(offset, limit) {
             )"></pokemon-card>
           `
 				)
-				.join("")
-        +`</div>
+				.join("") +
+			`</div>
           <div class="pagination" id="btnPagination">
           <button onclick="previous()"> Previous </button>
           <button onclick="next()"> Next </button>
           </div>`;
 		pokemonsDetail.innerHTML = newHtml;
 
+
+
 	});
 }
+
 function next() {
 	if (offset + limit < count - limit) {
 		offset += limit;
@@ -44,6 +48,7 @@ function next() {
 		loadMorePokemons(offset, limit);
 	}
 }
+
 function previous() {
 	if (offset >= limit) {
 		offset -= limit;
@@ -54,14 +59,16 @@ function previous() {
 	}
 }
 
-function searchBar (searchValue) {
-  searchValue = searchInput.value;
-  searchByName(searchValue)
+function searchBar(searchValue) {
+	searchValue = searchInput.value;
+	searchByName(searchValue);
 }
 function searchByName(searchValue) {
-    searchValue = searchValue.toLowerCase()
-    pokeApi.searchPokemon(searchValue).then((pokemon) => {
-  const newHtml=`
+	searchValue = searchValue.toLowerCase();
+	pokeApi
+		.searchPokemon(searchValue)
+		.then((pokemon) => {
+			const newHtml = `
   <button id="close" onclick="loadMorePokemons()"> X </button>
   <pokemon-detail
     mainType="${pokemon.mainType}"
@@ -69,34 +76,34 @@ function searchByName(searchValue) {
     pokemon-name="${pokemon.name}"
     pokemon-src='${pokemon.imagem}'
     pokemon-types='${pokemon.types
-                 .map((type) => `<span class="${type}">${type}</span>`)
-                 .join("")}'
+			.map((type) => `<span class="${type}">${type}</span>`)
+			.join("")}'
     pokemon-height='${pokemon.height}'
     pokemon-weight='${pokemon.weight}'
     pokemon-stats='${pokemon.stats
-      .map((stat) => `
+			.map(
+				(stat) => `
               <div class="stats-bar">
                   <span>${stat.name}</span>
                   <div class="bar">
                       <div class="fill ${pokemon.mainType}" style="width: ${stat.baseStat}%;">
                       </div>
                   </div>
-              </div>`)
-      .join("")}'
+              </div>`
+			)
+			.join("")}'
       pokemon-abilities='${pokemon.abilities
-        .map((ability) => `<span>${ability}</span>`)
-        .join("")}'
+				.map((ability) => `<span>${ability}</span>`)
+				.join("")}'
       pokemon-moves='${pokemon.moves
-        .map((move) => `<span>${move}</span>`)
-        .join("")}'
+				.map((move) => `<span>${move}</span>`)
+				.join("")}'
   >
   </pokemon-detail>
-  `
-pokemonsDetail.innerHTML = newHtml;
-})
-.catch((error) => console.log(error))}
-
-
+  `;
+			pokemonsDetail.innerHTML = newHtml;
+		})
+		.catch((error) => console.log(error));
+}
 
 loadMorePokemons(offset, limit);
-
