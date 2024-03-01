@@ -1,44 +1,32 @@
 const limit = 20;
 let offset = 0;
 const pokeApi = new PokeApi();
-const pokemonsDetail = document.getElementById("pokemon");
+import { screen } from "./screens.js";
+import { PokeApi } from "./services.js";
+// const pokemonsDetail = document.getElementById("pokemon");
+const searchBarButton = document.getElementById('searchButton')
 
-
-
+searchBarButton.addEventListener('click', searchBar)
 
 async function loadMorePokemons(offset, limit) {
-	pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-		const newHtml =
-			`<div class="search">
-      <input type="text" id="searchInput" placeholder="Procure o Pokémon">
-      <button id="searchButton" onclick="searchBar()">Search</button>
-      </div>
-      <div class="pokemons" id="pokemonsList">` +
-			pokemons
-				.map(
-					(pokemon) =>
-						` 
-          <pokemon-card          
-          mainType="${pokemon.mainType}"
-          pokemon-number="${pokemon.numberID}"
-          pokemon-name="${pokemon.name}"
-          pokemon-src='${pokemon.imagem}'
-          pokemon-types='${pokemon.types
-						.map((type) => `<li class="type ${type}">${type}</li>`)
-						.join("")}'
-            )"></pokemon-card>
-          `
-				)
-				.join("") +
-			`</div>
-          <div class="pagination" id="btnPagination">
-          <button onclick="previous()"> Previous </button>
-          <button onclick="next()"> Next </button>
-          </div>`;
-		pokemonsDetail.innerHTML = newHtml;
+	const pokemons = await pokeApi.getPokemons(offset, limit);
+	screen.renderPokemons(pokemons);
+	const cards = document.querySelectorAll(`pokemon-card `);
 
+	cards.forEach((card) => {
+		card.addEventListener("click", () => {
+			const namePkm = card.getAttribute("pokemon-name");
+			console.log(namePkm);
+			searchByName(namePkm);
+		});
+
+		const btnNext = document.getElementById("next");
+		const btnPrevious = document.getElementById("previous");
+		btnNext.addEventListener("click", next);
+		btnPrevious.addEventListener("click", previous);
 	});
 }
+
 function next() {
 	if (offset + limit < pokeApi.count - limit) {
 		offset += limit;
@@ -64,41 +52,10 @@ function searchBar(searchValue) {
 }
 async function searchByName(searchValue) {
 	searchValue = searchValue.toLowerCase();
-	pokemon = await pokeApi.searchPokemon(searchValue);
-	const newHtml = `
-  <button id="close" onclick="loadMorePokemons()"> X </button>
-  <pokemon-detail
-    mainType="${pokemon.mainType}"
-    pokemon-number="${pokemon.numberID}"
-    pokemon-name="${pokemon.name}"
-    pokemon-height='${pokemon.height}'
-    pokemon-weight='${pokemon.weight}'
-    pokemon-src='${pokemon.imagem}'
-    pokemon-types='${pokemon.types
-			.map((type) => `<span class="${type}">${type}</span>`)
-			.join("")}'
-    pokemon-stats='${pokemon.stats
-			.map(
-				(stat) => `
-              <div class="stats-bar">
-                  <span>${stat.name}</span>
-                  <div class="bar">
-                      <div class="fill ${pokemon.mainType}" style="width: ${stat.baseStat}%;">
-                      </div>
-                  </div>
-              </div>`
-			)
-			.join("")}'
-      pokemon-abilities='${pokemon.abilities
-				.map((ability) => `<span>${ability}</span>`)
-				.join("")}'
-      pokemon-moves='${pokemon.moves
-				.map((move) => `<span>${move}</span>`)
-				.join("")}'
-  >
-  </pokemon-detail>
-  `;
-	pokemonsDetail.innerHTML = newHtml;
+	const pokemon = await pokeApi.searchPokemon(searchValue);
+	screen.renderDetails(pokemon);
+	const close = document.getElementById('close')
+	close.addEventListener('click', ()=>loadMorePokemons(offset, limit))
 }
 
 loadMorePokemons(offset, limit);
