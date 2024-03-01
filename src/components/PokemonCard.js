@@ -16,10 +16,10 @@ class PokemonCard extends HTMLElement {
 			"class",
 			`pokemon ${this.getAttribute("mainType")}`
 		);
-		componentRoot.addEventListener("click", () => {
-			const namePkm = this.getAttribute("pokemon-name");
-			searchByName(namePkm);
-		});
+		// componentRoot.addEventListener("click", () => {
+		// 	const namePkm = this.getAttribute("pokemon-name");
+		// 	searchByName(namePkm);
+		// });
 
 		const pokemonNumber = document.createElement("span");
 		pokemonNumber.setAttribute("class", `number`);

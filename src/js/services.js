@@ -1,3 +1,4 @@
+import { Pokemon } from "./pokemon-model.js";
 
 class PokeApi {
     baseUrl = 'https://pokeapi.co/api/v2/pokemon'
@@ -30,9 +31,7 @@ class PokeApi {
     getPokemons = async (offset=0, limit=20) =>{
         const response = await fetch(`${this.baseUrl}?offset=${offset}&limit=${limit}`)
         const data = await response.json()
-        // console.log(data);
         this.count = await data.count
-        // console.log(this.count);
         const jsonBody = await data.results
         const pokemons = await Promise.all(jsonBody.map(pokemon => this.getPokemonsDetails(pokemon)))
         return pokemons
@@ -56,3 +55,4 @@ class PokeApi {
 }
 
 
+export {PokeApi}

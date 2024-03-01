@@ -10,3 +10,5 @@ class Pokemon {
     abilities = [];
     moves = [];
 }
+
+export {Pokemon}
